@@ -1,9 +1,14 @@
 package edu.temple.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
+
+const val SELECTED_SIZE = 1.0
 
 class DisplayActivity : AppCompatActivity() {
 
@@ -21,5 +26,13 @@ class DisplayActivity : AppCompatActivity() {
         lyricsDisplayTextView = findViewById(R.id.lyricsDisplayTextView)
         textSizeSelectorButton = findViewById(R.id.textSizeSelectorButton)
 
+        val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+//            lyricsDisplayTextView.textSize
+        }
+
+        textSizeSelectorButton.setOnClickListener {
+            val myIntent = Intent(this@DisplayActivity, TextSizeActivity::class.java)
+            launcher.launch(myIntent)
+        }
     }
 }
